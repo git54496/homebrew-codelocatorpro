@@ -1,12 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "usage: $0 <version>" >&2
+  echo "example: $0 0.2.0" >&2
+  exit 1
+fi
+
+VERSION="${1#v}"
+TAG="v${VERSION}"
+REPO="git54496/codelocatorpro"
+URL="https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+FORMULA_PATH="${ROOT_DIR}/Formula/grab.rb"
+TMP_ARCHIVE="$(mktemp "${TMPDIR:-/tmp}/grab-${VERSION}.XXXXXX.tar.gz")"
+trap 'rm -f "${TMP_ARCHIVE}"' EXIT
+
+curl -fL "${URL}" -o "${TMP_ARCHIVE}"
+SHA256="$(shasum -a 256 "${TMP_ARCHIVE}" | awk '{print $1}')"
+
+cat > "${FORMULA_PATH}" <<EOF
 class Grab < Formula
   desc "Android UI grab CLI for CodeLocatorPRO"
-  homepage "https://github.com/git54496/codelocatorpro"
-  url "https://github.com/git54496/codelocatorpro/archive/refs/tags/v0.2.0.tar.gz"
-  version "0.2.0"
-  sha256 "680540bc7bccffa6123e1b9b587b1c762fc1dcc6470e60aa7954d10670830155"
+  homepage "https://github.com/${REPO}"
+  url "${URL}"
+  version "${VERSION}"
+  sha256 "${SHA256}"
   license "Apache-2.0"
   version_scheme 1
-  head "https://github.com/git54496/codelocatorpro.git", branch: "main"
+  head "https://github.com/${REPO}.git", branch: "main"
 
   depends_on "openjdk@17"
 
@@ -34,16 +56,21 @@ class Grab < Formula
 
   test do
     version_output = shell_output("#{bin}/grab --version").strip
-    assert_equal "0.2.0", version_output
+    assert_equal "${VERSION}", version_output
     output = shell_output("#{bin}/grab list")
     assert_match "\"success\": true", output
   end
 
   def caveats
     <<~EOS
-      `grab live` requires `adb` in PATH.
+      \`grab live\` requires \`adb\` in PATH.
       Install it with:
         brew install --cask android-platform-tools
     EOS
   end
 end
+EOF
+
+echo "Updated ${FORMULA_PATH}"
+echo "version=${VERSION}"
+echo "sha256=${SHA256}"
