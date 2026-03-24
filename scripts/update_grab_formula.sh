@@ -3,25 +3,25 @@ set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
   echo "usage: $0 <version>" >&2
-  echo "example: $0 0.2.0" >&2
+  echo "example: $0 0.2.5" >&2
   exit 1
 fi
 
 VERSION="${1#v}"
 TAG="v${VERSION}"
-REPO="git54496/codelocatorpro"
+REPO="git54496/android-ui-grab"
 URL="https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-FORMULA_PATH="${ROOT_DIR}/Formula/grab.rb"
-TMP_ARCHIVE="$(mktemp "${TMPDIR:-/tmp}/grab-${VERSION}.XXXXXX.tar.gz")"
+FORMULA_PATH="${ROOT_DIR}/Formula/android-ui-grab.rb"
+TMP_ARCHIVE="$(mktemp "${TMPDIR:-/tmp}/android-ui-grab-${VERSION}.XXXXXX.tar.gz")"
 trap 'rm -f "${TMP_ARCHIVE}"' EXIT
 
 curl -fL "${URL}" -o "${TMP_ARCHIVE}"
 SHA256="$(shasum -a 256 "${TMP_ARCHIVE}" | awk '{print $1}')"
 
 cat > "${FORMULA_PATH}" <<EOF
-class Grab < Formula
-  desc "Android UI grab CLI for CodeLocatorPRO"
+class AndroidUiGrab < Formula
+  desc "Android UI Grab CLI"
   homepage "https://github.com/${REPO}"
   url "${URL}"
   version "${VERSION}"

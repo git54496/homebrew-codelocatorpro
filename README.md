@@ -1,35 +1,35 @@
-# homebrew-codelocatorpro
+# homebrew-android-ui-grab
 
-Homebrew tap repository for installing `grab` (CodeLocatorPRO CLI).
+Homebrew tap repository for installing the `android-ui-grab` package. The installed CLI command remains `grab`.
 
 ## Usage
 
 ```bash
-brew tap git54496/codelocatorpro
-brew install grab
+brew tap git54496/android-ui-grab
+brew install android-ui-grab
 ```
 
 Upgrade after the formula is versioned:
 
 ```bash
 brew update
-brew upgrade grab
+brew upgrade android-ui-grab
 ```
 
 ## Release Flow
 
-1. Push `codelocatorpro` and create a source tag such as `v0.2.0`.
-2. In this tap repo, run `./scripts/update_grab_formula.sh 0.2.0`.
-3. Commit and push the updated `Formula/grab.rb`.
-4. Users run `brew update && brew upgrade grab`.
+1. Push `android-ui-grab` and create a source tag such as `v0.2.5`.
+2. In this tap repo, run `./scripts/update_grab_formula.sh 0.2.5`.
+3. Commit and push the updated `Formula/android-ui-grab.rb`.
+4. Users run `brew update && brew upgrade android-ui-grab`.
 
-For users who installed the old `version "main"` formula, the first transition to a versioned formula may require a one-time `brew reinstall grab`.
+For users who installed the old `grab` formula, migrate once with `brew uninstall grab && brew install android-ui-grab`.
 
 ## Notes
 
-- Formula file: `Formula/grab.rb`
+- Formula file: `Formula/android-ui-grab.rb`
 - Formula update helper: `scripts/update_grab_formula.sh`
-- Source code repository: `https://github.com/git54496/codelocatorpro`
+- Source code repository: `https://github.com/git54496/android-ui-grab`
 - Runtime dependency for live grabbing:
 
 ```bash
