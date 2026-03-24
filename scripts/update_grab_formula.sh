@@ -3,7 +3,7 @@ set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
   echo "usage: $0 <version>" >&2
-  echo "example: $0 0.2.6" >&2
+  echo "example: $0 0.2.7" >&2
   exit 1
 fi
 

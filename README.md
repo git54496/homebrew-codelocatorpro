@@ -18,8 +18,8 @@ brew upgrade android-ui-grab
 
 ## Release Flow
 
-1. Push `android-ui-grab` and create a source tag such as `v0.2.6`.
-2. In this tap repo, run `./scripts/update_grab_formula.sh 0.2.6`.
+1. Push `android-ui-grab` and create a source tag such as `v0.2.7`.
+2. In this tap repo, run `./scripts/update_grab_formula.sh 0.2.7`.
 3. Commit and push the updated `Formula/android-ui-grab.rb`.
 4. Users run `brew update && brew upgrade android-ui-grab`.
 
