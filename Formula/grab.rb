@@ -1,9 +1,9 @@
 class Grab < Formula
   desc "Android UI grab CLI for CodeLocatorPRO"
   homepage "https://github.com/git54496/codelocatorpro"
-  url "https://github.com/git54496/codelocatorpro/archive/refs/tags/v0.2.3.tar.gz"
-  version "0.2.3"
-  sha256 "3a126735e8c8ca6aa6f1cdb33561f55c67489b20b952bb7f78bf67923574e9ee"
+  url "https://github.com/git54496/codelocatorpro/archive/refs/tags/v0.2.4.tar.gz"
+  version "0.2.4"
+  sha256 "8e8e785603ec0e8e9d8f538277a757d065ccdff15148faeca1c17413dbecf636"
   license "Apache-2.0"
   version_scheme 1
   head "https://github.com/git54496/codelocatorpro.git", branch: "main"
@@ -34,7 +34,7 @@ class Grab < Formula
 
   test do
     version_output = shell_output("#{bin}/grab --version").strip
-    assert_equal "0.2.3", version_output
+    assert_equal "0.2.4", version_output
     output = shell_output("#{bin}/grab list")
     assert_match "\"success\": true", output
   end
