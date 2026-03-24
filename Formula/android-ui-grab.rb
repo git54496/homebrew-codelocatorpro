@@ -1,9 +1,9 @@
 class AndroidUiGrab < Formula
   desc "Android UI Grab CLI"
   homepage "https://github.com/git54496/android-ui-grab"
-  url "https://github.com/git54496/android-ui-grab/archive/refs/tags/v0.2.5.tar.gz"
-  version "0.2.5"
-  sha256 "215af5d4622a99f8241ea3618727fa17ae44f1becda7ec241aedc483329767f3"
+  url "https://github.com/git54496/android-ui-grab/archive/refs/tags/v0.2.6.tar.gz"
+  version "0.2.6"
+  sha256 "26d963b6b2e8d5cbbc40e72bfffa8d51e62f401d285268fdcefcebeabbeed979"
   license "Apache-2.0"
   version_scheme 1
   head "https://github.com/git54496/android-ui-grab.git", branch: "main"
@@ -34,7 +34,7 @@ class AndroidUiGrab < Formula
 
   test do
     version_output = shell_output("#{bin}/grab --version").strip
-    assert_equal "0.2.5", version_output
+    assert_equal "0.2.6", version_output
     output = shell_output("#{bin}/grab list")
     assert_match "\"success\": true", output
   end
